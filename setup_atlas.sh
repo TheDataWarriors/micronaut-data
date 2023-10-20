@@ -30,10 +30,10 @@ test-resources:
 
     datasources:
       default:
-        url: ${JDBC_URL:`jdbc:oracle:thin:@localhost:1521/XEPDB1`}
-        username: ${JDBC_USER:system}
-        password: ${JDBC_PASSWORD:S3cr3TP4$$wd}
-        driverClassName: ${JDBC_DRIVER:oracle.jdbc.driver.OracleDriver}
+        url: ${JDBC_URL}
+        username: ${JDBC_USER}
+        password: ${JDBC_PASSWORD}
+        driverClassName: oracle.jdbc.driver.OracleDriver
 
     micronaut:
       http:
