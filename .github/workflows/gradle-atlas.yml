@@ -65,7 +65,7 @@ jobs:
       - name: "🛠 Build with Gradle"
         id: gradle
         run: |
-          ./gradlew micronaut-data-jdbc:test --tests "*oracle*" -Plog-test-progress=true --stacktrace --no-daemon --continue
+          ./gradlew micronaut-data-jdbc:test --tests "*oracle*" --console=plain -Plog-test-progress=true --stacktrace --no-daemon --continue
 
       - name: "🔎 Run static analysis"
         if: env.SONAR_TOKEN != '' && matrix.java == '17'

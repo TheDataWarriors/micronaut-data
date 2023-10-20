@@ -1,5 +1,5 @@
 #!/bin/bash
-systemctl --user start podman.socket
+#systemctl --user start podman.socket
 
 export PASSWORD=My_Strong_Pa55word
 export HOST=db23c.micronautdata.vcnatlas.oraclevcn.com
