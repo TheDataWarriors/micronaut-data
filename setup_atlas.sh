@@ -17,26 +17,26 @@ export JDBC_PASSWORD="Oracle_19_Password"
 
 cat <<EOF > ./data-jdbc/src/test/resources/application.yml
 test-resources:
-      containers:
-        mssql:
-          accept-license: true
-          startup-timeout: 300s
-        mariadb:
-          startup-timeout: 300s
-        mysql:
-          startup-timeout: 300s
-        postgres:
-          startup-timeout: 300s
+  containers:
+    mssql:
+      accept-license: true
+      startup-timeout: 300s
+    mariadb:
+      startup-timeout: 300s
+    mysql:
+      startup-timeout: 300s
+    postgres:
+      startup-timeout: 300s
 
-    datasources:
-      default:
-        url: ${JDBC_URL}
-        username: ${JDBC_USER}
-        password: ${JDBC_PASSWORD}
-        driverClassName: oracle.jdbc.driver.OracleDriver
+datasources:
+  default:
+    url: ${JDBC_URL}
+    username: ${JDBC_USER}
+    password: ${JDBC_PASSWORD}
+    driverClassName: oracle.jdbc.driver.OracleDriver
 
-    micronaut:
-      http:
-        client:
-          read-timeout: 5m
+micronaut:
+  http:
+    client:
+      read-timeout: 5m
 EOF
