@@ -15,7 +15,7 @@ export JDBC_URL=jdbc:oracle:thin:@$HOST:1521/$SERVICE
 export JDBC_USER=micronaut_data_$RUNID
 export JDBC_URL=Oracle_19_Password
 
-cat <<EOF
+cat <<EOF > ./data-jdbc/src/test/resources/application.yml
 test-resources:
       containers:
         mssql:
@@ -39,4 +39,4 @@ test-resources:
       http:
         client:
           read-timeout: 5m
-EOF > data-jdbc/src/test/resources/application.yml
+EOF
