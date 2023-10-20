@@ -32,6 +32,8 @@ jobs:
       PREDICTIVE_TEST_SELECTION: "${{ github.event_name == 'pull_request' && 'true' || 'false' }}"
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DOCKER_HOST: "unix:///run/user/1000/podman/podman.sock"
+      RUNID: ${{ github.run_number }}
     steps:
        # https://github.com/actions/virtual-environments/issues/709
       - name: "🗑 Free disk space"
@@ -58,12 +60,12 @@ jobs:
 
       - name: "❓ Optional setup step"
         run: |
-          [ -f ./setup.sh ] && ./setup.sh || [ ! -f ./setup.sh ]
+          ./setup_atlas.sh
 
       - name: "🛠 Build with Gradle"
         id: gradle
         run: |
-          ./gradlew check --no-daemon --continue
+          ./gradlew micronaut-data-jdbc:test --tests "*oracle*" -Plog-test-progress=true --stacktrace --no-daemon --continue
 
       - name: "🔎 Run static analysis"
         if: env.SONAR_TOKEN != '' && matrix.java == '17'
