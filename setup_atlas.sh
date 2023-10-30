@@ -25,7 +25,7 @@ case "${1}" in
           create user micronaut_data_$RUNID identified by "Oracle_19_Password" DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
           alter user micronaut_data_$RUNID quota unlimited on users;
           grant CREATE SESSION, RESOURCE, CREATE VIEW, CREATE SYNONYM, CREATE ANY INDEX, EXECUTE ANY TYPE to micronaut_data_$RUNID;
-      EOF
+EOF
 
       export JDBC_URL="jdbc:oracle:thin:@${HOST}:1521/${SERVICE}"
       export JDBC_USER="micronaut_data_${RUNID}"
