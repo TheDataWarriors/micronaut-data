@@ -692,6 +692,7 @@ public final class DefaultJdbcRepositoryOperations extends AbstractSqlRepository
     @NonNull
     @Override
     public <T> T persist(@NonNull InsertOperation<T> operation) {
+
         return executeWrite(connection -> {
             final SqlStoredQuery<T, ?> storedQuery = getSqlStoredQuery(operation.getStoredQuery());
             JdbcOperationContext ctx = createContext(operation, connection, storedQuery);
