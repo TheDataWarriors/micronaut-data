@@ -33,7 +33,6 @@ EOF
       ;;
 esac;
 
-
 cat <<EOF > ./data-jdbc/src/test/resources/application.yml
 test-resources:
   containers:
