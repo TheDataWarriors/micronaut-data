@@ -62,16 +62,19 @@ datasources:
     username: ${JDBC_USER}
     password: ${JDBC_PASSWORD}
     driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
   foo:
     url: ${JDBC_URL}
     username: ${JDBC_USER}_foo
     password: ${JDBC_PASSWORD}
     driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
   bar:
     url: ${JDBC_URL}
     username: ${JDBC_USER}_bar
     password: ${JDBC_PASSWORD}
     driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
 
 micronaut:
   http:
