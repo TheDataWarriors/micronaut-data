@@ -37,6 +37,7 @@ import oracle.sql.json.OracleJsonParser;
 
 import java.io.IOException;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * The Oracle JDBC json binary column reader and value mapper.
