@@ -192,7 +192,7 @@ public enum Dialect {
     }
 
     public boolean isNativeJson() {
-        return jsonDataTypeDefaultOverride.equalsIgnoreCase() || jsonDataTypeDefaultOverride.toLowerCase().contains("format oson");
+        return jsonDataTypeDefaultOverride.equalsIgnoreCase("JSON") || jsonDataTypeDefaultOverride.toLowerCase().contains("format oson");
     }
 
     /**
