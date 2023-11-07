@@ -171,7 +171,7 @@ datasources:
     driverClassName: oracle.jdbc.driver.OracleDriver
     schema-generate: CREATE_DROP
     db-type: oracle
-    dialect: oracle_21
+    dialect: oracle
   foo:
     url: ${JDBC_URL}
     username: ${JDBC_USER}_foo
@@ -179,7 +179,7 @@ datasources:
     driverClassName: oracle.jdbc.driver.OracleDriver
     schema-generate: CREATE_DROP
     db-type: oracle
-    dialect: oracle_21
+    dialect: oracle
   bar:
     url: ${JDBC_URL}
     username: ${JDBC_USER}_bar
@@ -187,7 +187,7 @@ datasources:
     driverClassName: oracle.jdbc.driver.OracleDriver
     schema-generate: CREATE_DROP
     db-type: oracle
-    dialect: oracle_21
+    dialect: oracle
 
 micronaut:
   http:

@@ -108,7 +108,7 @@ final class OracleJdbcJsonColumnMapper implements SqlJsonColumnReader<ResultSet>
 
     @Override
     public boolean supportsRead(SqlPreparedQuery<?, ?> sqlPreparedQuery) {
-        return sqlPreparedQuery.getDialect() == Dialect.ORACLE;
+        return sqlPreparedQuery.getDialect() == Dialect.ORACLE || sqlPreparedQuery.getDialect() == Dialect.ORACLE_19;
     }
 
     @Override
@@ -127,6 +127,6 @@ final class OracleJdbcJsonColumnMapper implements SqlJsonColumnReader<ResultSet>
 
     @Override
     public boolean supportsMapValue(SqlStoredQuery<?, ?> sqlStoredQuery, JsonDataType jsonDataType) {
-        return sqlStoredQuery.getDialect() == Dialect.ORACLE;
+        return sqlStoredQuery.getDialect() == Dialect.ORACLE || sqlStoredQuery.getDialect() == Dialect.ORACLE_19;
     }
 }

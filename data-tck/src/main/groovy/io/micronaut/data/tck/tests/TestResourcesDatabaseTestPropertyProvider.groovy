@@ -25,6 +25,8 @@ trait TestResourcesDatabaseTestPropertyProvider implements TestPropertyProvider 
                 return "h2"
             case Dialect.SQL_SERVER:
                 return "mssql"
+            case Dialect.ORACLE_19:
+                return "oracle"
             case Dialect.ORACLE:
                 return "oracle"
             case Dialect.MYSQL:
