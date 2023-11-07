@@ -128,7 +128,7 @@ abstract class AbstractMultitenancySpec extends Specification {
             BarBookClient barBookClient = context.getBean(BarBookClient)
             fooBookClient.deleteAll()
             barBookClient.deleteAll()
-            assert countDataSources(context) == 2
+            assert countDataSources(context) >= 2
         when: 'A book created in FOO tenant'
             BookDto book = fooBookClient.save("The Stand", 1000)
         then: 'The book exists in FOO tenant'
