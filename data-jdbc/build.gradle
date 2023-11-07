@@ -91,6 +91,7 @@ micronaut {
 tasks.withType(Test).configureEach {
     jvmArgs '-Xmx1024m'
     systemProperty "oracle.jdbc.timezoneAsRegion", "false"
+    systemProperty "oracle.jdbc.json.type.default.override", project.getProperty("oracle.jdbc.json.type.default.override","JSON")
 }
 
 micronautBuild {

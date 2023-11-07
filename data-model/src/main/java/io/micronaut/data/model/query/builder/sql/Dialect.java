@@ -129,7 +129,7 @@ public enum Dialect {
         this.supportsUpdateReturning = supportsUpdateReturning;
         this.supportsInsertReturning = supportsInsertReturning;
         this.supportsDeleteReturning = supportsDeleteReturning;
-        this.jsonDataTypeDefaultOverride = System.getProperty("io.micronaut.data.json.type.default.override","JSON");
+        this.jsonDataTypeDefaultOverride = System.getProperty("oracle.jdbc.json.type.default.override","JSON");
     }
 
     /**

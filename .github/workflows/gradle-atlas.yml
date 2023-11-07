@@ -69,7 +69,7 @@ jobs:
         env:
           JSON_DEFAULT_DATA_TYPE: ${{ steps.setup.outputs.JSON_DEFAULT_DATA_TYPE }}
         run: |
-          ./gradlew -Dio.micronaut.data.json.type.default.override=${{ env.JSON_DEFAULT_DATA_TYPE }} micronaut-data-jdbc:test --tests "*oracle*" --console=plain -Plog-test-progress=true --stacktrace --no-daemon --continue --info
+          ./gradlew -Poracle.jdbc.json.type.default.override=${{ env.JSON_DEFAULT_DATA_TYPE }} micronaut-data-jdbc:test --tests "*oracle*" --console=plain -Plog-test-progress=true --stacktrace --no-daemon --continue --info
 
       - name: "🔎 Run static analysis"
         if: env.SONAR_TOKEN != '' && matrix.java == '17'
