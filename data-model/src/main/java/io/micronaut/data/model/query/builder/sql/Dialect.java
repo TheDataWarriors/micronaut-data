@@ -191,6 +191,10 @@ public enum Dialect {
         return jsonDataTypeDefaultOverride;
     }
 
+    public boolean isNativeJson() {
+        return jsonDataTypeDefaultOverride.equalsIgnoreCase() || jsonDataTypeDefaultOverride.toLowerCase().contains("format oson");
+    }
+
     /**
      * Whether the dialect supports UPDATE ... RETURNING clause.
      *

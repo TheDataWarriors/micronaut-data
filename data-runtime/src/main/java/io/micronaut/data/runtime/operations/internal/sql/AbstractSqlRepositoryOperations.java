@@ -237,7 +237,7 @@ public abstract class AbstractSqlRepositoryOperations<RS, PS, Exc extends Except
                 }
                 break;
             case JSON:
-                value = getJsonValue(storedQuery, jsonDataType, index, value);
+                value = getJsonValue(storedQuery, jsonDataType == JsonDataType.BLOB ? (dialect.isNativeJson() ? JsonDataType.DEFAULT : JsonDataType.BLOB ) : jsonDataType, index, value);
                 break;
             case ENTITY:
                 if (value != null) {
