@@ -62,7 +62,7 @@ datasources:
     username: ${JDBC_USER}
     password: ${JDBC_PASSWORD}
     driverClassName: oracle.jdbc.driver.OracleDriver
-    schema-generate: CREATE
+    schema-generate: CREATE_DROP
     db-type: oracle
     dialect: oracle
   foo:
@@ -70,7 +70,7 @@ datasources:
     username: ${JDBC_USER}_foo
     password: ${JDBC_PASSWORD}
     driverClassName: oracle.jdbc.driver.OracleDriver
-    schema-generate: CREATE
+    schema-generate: CREATE_DROP
     db-type: oracle
     dialect: oracle
   bar:
@@ -78,7 +78,7 @@ datasources:
     username: ${JDBC_USER}_bar
     password: ${JDBC_PASSWORD}
     driverClassName: oracle.jdbc.driver.OracleDriver
-    schema-generate: CREATE
+    schema-generate: CREATE_DROP
     db-type: oracle
     dialect: oracle
 
