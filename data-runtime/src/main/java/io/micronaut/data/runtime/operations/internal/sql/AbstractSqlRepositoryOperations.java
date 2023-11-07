@@ -257,7 +257,7 @@ public abstract class AbstractSqlRepositoryOperations<RS, PS, Exc extends Except
         dataType = dialect.getDataType(dataType);
 
         if (QUERY_LOG.isTraceEnabled()) {
-            QUERY_LOG.trace("Binding parameter at position {} to value {} with data type: {}", index, value, dataType);
+            QUERY_LOG.trace("Binding parameter at position {} to value {} with data type: {} / {} / {}", index, value, dataType, jsonDataType, dialect.getJsonDataTypeDefaultOverride());
         }
 
         // We want to avoid potential conversion for JSON because mapper already returned value ready to be set as statement parameter
