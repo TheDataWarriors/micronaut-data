@@ -254,7 +254,7 @@ final class SqlQueryBuilderUtils {
                 }
                 break;
             case JSON:
-                column = column + jsonColumnDefinition(prop, dialect, required);
+                column = column + jsonColumnDefinition(prop, dialect, required, column);
                 break;
             case STRING_ARRAY:
             case CHARACTER_ARRAY:
@@ -349,7 +349,9 @@ final class SqlQueryBuilderUtils {
         return column;
     }
 
-    private static String jsonColumnDefinition(PersistentProperty prop, Dialect dialect, boolean required) {
+    private static String jsonColumnDefinition(PersistentProperty prop, Dialect dialect, boolean required, String column) {
+        dialect.
+
         JsonDataType jsonDataType = prop.getJsonDataType();
         String result = "";
         switch (dialect) {
@@ -359,13 +361,26 @@ final class SqlQueryBuilderUtils {
             case SQL_SERVER:
                 result += " NVARCHAR(MAX)";
                 break;
+            case ORACLE_12:
+            case ORACLE_12R2:
+            case ORACLE_18:
+            case ORACLE_19:
+                if (jsonDataType == JsonDataType.DEFAULT) {
+                    result += " BLOB check ("+column+" is json)";
+                } else if (jsonDataType == JsonDataType.BLOB) {
+                    result += " BLOB check ("+column+" is json)";
+                } else {
+                    result += " CLOB check ("+column+" is json)";
+                }
+                break;
+            case ORACLE_21:
             case ORACLE:
                 if (jsonDataType == JsonDataType.DEFAULT) {
                     result += " JSON";
                 } else if (jsonDataType == JsonDataType.BLOB) {
-                    result += " BLOB";
+                    result += " BLOB check ("+column+" is json)";
                 } else {
-                    result += " CLOB";
+                    result += " CLOB check ("+column+" is json)";
                 }
                 break;
             default:

@@ -21,8 +21,53 @@ case "${1}" in
       export JDBC_URL="jdbc:oracle:thin:@(description=(retry_count=5)(retry_delay=1)(address=(protocol=tcps)(port=1521)(host=${HOST}.oraclecloud.com))(connect_data=(service_name=${SERVICE}_tp.adb.oraclecloud.com))(security=(ssl_server_dn_match=no)))?oracle.jdbc.enableQueryResultCache=false&oracle.jdbc.thinForceDNSLoadBalancing=true&tcp.nodelay=yes"
       export JDBC_USER="micronaut_data_${RUNID}"
       export JDBC_PASSWORD="Oracle_19_Password"
+
+      cat <<EOF > ./data-jdbc/src/test/resources/application.yml
+test-resources:
+  containers:
+    mssql:
+      accept-license: true
+      startup-timeout: 300s
+    mariadb:
+      startup-timeout: 300s
+    mysql:
+      startup-timeout: 300s
+    postgres:
+      startup-timeout: 300s
+
+datasources:
+  default:
+    url: ${JDBC_URL}
+    username: ${JDBC_USER}
+    password: ${JDBC_PASSWORD}
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
+    db-type: oracle
+    dialect: oracle_19
+  foo:
+    url: ${JDBC_URL}
+    username: ${JDBC_USER}_foo
+    password: ${JDBC_PASSWORD}
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
+    db-type: oracle
+    dialect: oracle_19
+  bar:
+    url: ${JDBC_URL}
+    username: ${JDBC_USER}_bar
+    password: ${JDBC_PASSWORD}
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
+    db-type: oracle
+    dialect: oracle_19
+
+micronaut:
+  http:
+    client:
+      read-timeout: 5m
+EOF
       ;;
-    *)
+    "db19c")
       /home/opc/sqlcl/bin/sql -s system/$PASSWORD@$HOST:1521/$SERVICE <<EOF
           create user micronaut_data_${RUNID} identified by "Oracle_19_Password" DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
           alter user micronaut_data_${RUNID} quota unlimited on users;
@@ -40,10 +85,136 @@ EOF
       export JDBC_URL="jdbc:oracle:thin:@${HOST}:1521/${SERVICE}"
       export JDBC_USER="micronaut_data_${RUNID}"
       export JDBC_PASSWORD="Oracle_19_Password"
-      ;;
-esac;
 
-cat <<EOF > ./data-jdbc/src/test/resources/application.yml
+      cat <<EOF > ./data-jdbc/src/test/resources/application.yml
+test-resources:
+  containers:
+    mssql:
+      accept-license: true
+      startup-timeout: 300s
+    mariadb:
+      startup-timeout: 300s
+    mysql:
+      startup-timeout: 300s
+    postgres:
+      startup-timeout: 300s
+
+datasources:
+  default:
+    url: ${JDBC_URL}
+    username: ${JDBC_USER}
+    password: ${JDBC_PASSWORD}
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
+    db-type: oracle
+    dialect: oracle_19
+  foo:
+    url: ${JDBC_URL}
+    username: ${JDBC_USER}_foo
+    password: ${JDBC_PASSWORD}
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
+    db-type: oracle
+    dialect: oracle_19
+  bar:
+    url: ${JDBC_URL}
+    username: ${JDBC_USER}_bar
+    password: ${JDBC_PASSWORD}
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
+    db-type: oracle
+    dialect: oracle_19
+
+micronaut:
+  http:
+    client:
+      read-timeout: 5m
+EOF
+      ;;
+    "db21c")
+      /home/opc/sqlcl/bin/sql -s system/$PASSWORD@$HOST:1521/$SERVICE <<EOF
+          create user micronaut_data_${RUNID} identified by "Oracle_21_Password" DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
+          alter user micronaut_data_${RUNID} quota unlimited on users;
+          grant CREATE SESSION, RESOURCE, CREATE VIEW, CREATE SYNONYM, CREATE ANY INDEX, EXECUTE ANY TYPE to micronaut_data_${RUNID};
+          -- foo
+          create user micronaut_data_${RUNID}_foo identified by "Oracle_21_Password" DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
+          alter user micronaut_data_${RUNID}_foo quota unlimited on users;
+          grant CREATE SESSION, RESOURCE, CREATE VIEW, CREATE SYNONYM, CREATE ANY INDEX, EXECUTE ANY TYPE to micronaut_data_${RUNID}_foo;
+          -- bar
+          create user micronaut_data_${RUNID}_bar identified by "Oracle_21_Password" DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
+          alter user micronaut_data_${RUNID}_bar quota unlimited on users;
+          grant CREATE SESSION, RESOURCE, CREATE VIEW, CREATE SYNONYM, CREATE ANY INDEX, EXECUTE ANY TYPE to micronaut_data_${RUNID}_bar;
+EOF
+
+      export JDBC_URL="jdbc:oracle:thin:@${HOST}:1521/${SERVICE}"
+      export JDBC_USER="micronaut_data_${RUNID}"
+      export JDBC_PASSWORD="Oracle_21_Password"
+
+      cat <<EOF > ./data-jdbc/src/test/resources/application.yml
+test-resources:
+  containers:
+    mssql:
+      accept-license: true
+      startup-timeout: 300s
+    mariadb:
+      startup-timeout: 300s
+    mysql:
+      startup-timeout: 300s
+    postgres:
+      startup-timeout: 300s
+
+datasources:
+  default:
+    url: ${JDBC_URL}
+    username: ${JDBC_USER}
+    password: ${JDBC_PASSWORD}
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
+    db-type: oracle
+    dialect: oracle_21
+  foo:
+    url: ${JDBC_URL}
+    username: ${JDBC_USER}_foo
+    password: ${JDBC_PASSWORD}
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
+    db-type: oracle
+    dialect: oracle_21
+  bar:
+    url: ${JDBC_URL}
+    username: ${JDBC_USER}_bar
+    password: ${JDBC_PASSWORD}
+    driverClassName: oracle.jdbc.driver.OracleDriver
+    schema-generate: CREATE_DROP
+    db-type: oracle
+    dialect: oracle_21
+
+micronaut:
+  http:
+    client:
+      read-timeout: 5m
+EOF
+      ;;
+    "db23c")
+      /home/opc/sqlcl/bin/sql -s system/$PASSWORD@$HOST:1521/$SERVICE <<EOF
+          create user micronaut_data_${RUNID} identified by "Oracle_23_Password" DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
+          alter user micronaut_data_${RUNID} quota unlimited on users;
+          grant DB_DEVELOPER_ROLE to micronaut_data_${RUNID};
+          -- foo
+          create user micronaut_data_${RUNID}_foo identified by "Oracle_23_Password" DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
+          alter user micronaut_data_${RUNID}_foo quota unlimited on users;
+          grant DB_DEVELOPER_ROLE to micronaut_data_${RUNID}_foo;
+          -- bar
+          create user micronaut_data_${RUNID}_bar identified by "Oracle_23_Password" DEFAULT TABLESPACE USERS TEMPORARY TABLESPACE TEMP;
+          alter user micronaut_data_${RUNID}_bar quota unlimited on users;
+          grant DB_DEVELOPER_ROLE to micronaut_data_${RUNID}_bar;
+EOF
+
+      export JDBC_URL="jdbc:oracle:thin:@${HOST}:1521/${SERVICE}"
+      export JDBC_USER="micronaut_data_${RUNID}"
+      export JDBC_PASSWORD="Oracle_23_Password"
+
+      cat <<EOF > ./data-jdbc/src/test/resources/application.yml
 test-resources:
   containers:
     mssql:
@@ -87,3 +258,6 @@ micronaut:
     client:
       read-timeout: 5m
 EOF
+      ;;
+esac;
+
