@@ -70,11 +70,25 @@ final class OracleJdbcJsonColumnMapper implements SqlJsonColumnReader<ResultSet>
         try {
             switch (jsonDataType) {
                 case DEFAULT -> {
-                    OracleJsonParser jsonParser = resultSet.getObject(columnName, OracleJsonParser.class);
-                    if (jsonParser == null) {
-                        return null;
+                    try {
+                        OracleJsonParser jsonParser = resultSet.getObject(columnName, OracleJsonParser.class);
+                        if (jsonParser == null) {
+                            return null;
+                        }
+                        return binaryObjectMapper.readValue(jsonParser, argument);
                     }
-                    return binaryObjectMapper.readValue(jsonParser, argument);
+                    catch(SQLException sqle) {
+                        // fall back to BLOB mode
+                        if( sqle.getErrorCode() == -17004 ) {
+                            byte[] bytes = resultSet.getBytes(columnName);
+                            if (bytes == null) {
+                                return null;
+                            }
+                            return binaryObjectMapper.readValue(bytes, argument);
+                        } else {
+                            throw sqle;
+                        }
+                    }
                 }
                 case BLOB -> {
                     byte[] bytes = resultSet.getBytes(columnName);
