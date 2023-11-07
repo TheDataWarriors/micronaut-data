@@ -62,6 +62,7 @@ jobs:
       - name: "❓ Optional setup step"
         run: |
           ./setup_atlas.sh ${{ matrix.rdbms }}
+          echo "::set-env name=JSON_DEFAULT_DATA_TYPE::${JSON_DEFAULT_DATA_TYPE}"
 
       - name: "🛠 Build with Gradle"
         id: gradle
