@@ -359,18 +359,14 @@ final class SqlQueryBuilderUtils {
             case SQL_SERVER:
                 result += " NVARCHAR(MAX)";
                 break;
-            case ORACLE_19:
-                if (jsonDataType == JsonDataType.DEFAULT) {
-                    result += " BLOB check ("+column+" is json)";
-                } else if (jsonDataType == JsonDataType.BLOB) {
-                    result += " BLOB check ("+column+" is json)";
-                } else {
-                    result += " CLOB check ("+column+" is json)";
-                }
-                break;
             case ORACLE:
                 if (jsonDataType == JsonDataType.DEFAULT) {
-                    result += " JSON";
+                    if( dialect.getJsonDataTypeDefaultOverride().contains("%s") ) {
+                        result += " " + String.format( dialect.getJsonDataTypeDefaultOverride(), column );
+                    } else {
+                        result += " " + dialect.getJsonDataTypeDefaultOverride();
+                    }
+//                    result += " BLOB check ("+column+" is json)";
                 } else if (jsonDataType == JsonDataType.BLOB) {
                     result += " BLOB check ("+column+" is json)";
                 } else {

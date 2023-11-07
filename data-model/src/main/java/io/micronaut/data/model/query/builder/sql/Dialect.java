@@ -71,11 +71,7 @@ public enum Dialect {
      */
     SQL_SERVER(false, false, ALL_TYPES),
     /**
-     * Oracle 12c, 12cR2, 18c or 19c.
-     */
-    ORACLE_19(true, true, ALL_TYPES, true, false, false, false),
-    /**
-     * Oracle 21c, 23c or above.
+     * Oracle 12 or above.
      */
     ORACLE(true, true, ALL_TYPES, true, false, false, false),
     /**
@@ -87,6 +83,8 @@ public enum Dialect {
     private final boolean stringUUID;
 
     private final boolean supportsJsonEntity;
+
+    private final String jsonDataTypeDefaultOverride;
 
     private final EnumSet<Join.Type> joinTypesSupported;
 
@@ -131,6 +129,7 @@ public enum Dialect {
         this.supportsUpdateReturning = supportsUpdateReturning;
         this.supportsInsertReturning = supportsInsertReturning;
         this.supportsDeleteReturning = supportsDeleteReturning;
+        this.jsonDataTypeDefaultOverride = System.getProperty("io.micronaut.data.json.type.default.override","JSON");
     }
 
     /**
@@ -186,6 +185,10 @@ public enum Dialect {
      */
     public boolean supportsJsonEntity() {
         return supportsJsonEntity;
+    }
+
+    public String getJsonDataTypeDefaultOverride() {
+        return jsonDataTypeDefaultOverride;
     }
 
     /**

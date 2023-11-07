@@ -693,7 +693,6 @@ public class SqlQueryBuilder extends AbstractSqlLikeQueryBuilder implements Quer
                         column += " IDENTITY(1,1) NOT NULL";
                     }
                     break;
-                case ORACLE_19:
                 case ORACLE:
                     // for Oracle we use sequences so just add NOT NULL
                     // then alter the table for sequences
@@ -1177,7 +1176,6 @@ public class SqlQueryBuilder extends AbstractSqlLikeQueryBuilder implements Quer
     private String getSequenceStatement(String unescapedTableName, PersistentProperty property) {
         final String sequenceName = resolveSequenceName(property, unescapedTableName);
         switch (dialect) {
-            case ORACLE_19:
             case ORACLE:
                 return quote(sequenceName) + ".nextval";
             case POSTGRES:
@@ -1231,7 +1229,6 @@ public class SqlQueryBuilder extends AbstractSqlLikeQueryBuilder implements Quer
                     }
                     // intentional fall through
                 case ANSI:
-                case ORACLE_19:
                 case ORACLE:
                 default:
                     if (from != 0) {
@@ -1720,7 +1717,6 @@ public class SqlQueryBuilder extends AbstractSqlLikeQueryBuilder implements Quer
                 return '`' + persistedName + '`';
             case SQL_SERVER:
                 return '[' + persistedName + ']';
-            case ORACLE_19:
             case ORACLE:
                 // Oracle requires quoted identifiers to be in upper case
                 return '"' + persistedName.toUpperCase(Locale.ENGLISH) + '"';

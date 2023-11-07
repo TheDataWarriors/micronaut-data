@@ -48,7 +48,6 @@ final class DefaultR2dbcSchemaHandler implements R2dbcSchemaHandler {
     @Override
     public Publisher<Void> useSchema(Connection connection, Dialect dialect, String name) {
         switch (dialect) {
-            case ORACLE_19:
             case ORACLE:
                 return executeQuery(connection, "ALTER SESSION SET CURRENT_SCHEMA=" + name);
             case SQL_SERVER:

@@ -52,7 +52,6 @@ final class DefaultJdbcSchemaHandler implements JdbcSchemaHandler {
     public void useSchema(Connection connection, Dialect dialect, String name) {
         try {
             switch (dialect) {
-                case ORACLE_19:
                 case ORACLE:
                     executeQuery(connection, "ALTER SESSION SET CURRENT_SCHEMA=" + name);
                     break;
