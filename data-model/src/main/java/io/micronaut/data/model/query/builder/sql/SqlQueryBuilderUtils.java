@@ -362,19 +362,19 @@ final class SqlQueryBuilderUtils {
             case ORACLE:
                 if (jsonDataType == JsonDataType.DEFAULT) {
                     if( dialect.getJsonDataTypeDefaultOverride().contains("%s") ) {
-                        result += " " + String.format( dialect.getJsonDataTypeDefaultOverride(), column );
+                        result += " /*1*/ " + String.format( dialect.getJsonDataTypeDefaultOverride(), column );
                     } else {
-                        result += " " + dialect.getJsonDataTypeDefaultOverride();
+                        result += " /*2*/ " + dialect.getJsonDataTypeDefaultOverride();
                     }
 //                    result += " BLOB check ("+column+" is json)";
                 } else if (jsonDataType == JsonDataType.BLOB) {
-                    result += " BLOB check ("+column+" is json)";
+                    result += " /*3*/ BLOB check ("+column+" is json)";
                 } else {
-                    result += " CLOB check ("+column+" is json)";
+                    result += " /*4*/ CLOB check ("+column+" is json)";
                 }
                 break;
             default:
-                result += " JSON";
+                result += " /*5*/ JSON";
                 break;
         }
         if (required) {
