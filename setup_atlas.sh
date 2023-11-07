@@ -21,7 +21,8 @@ case "${1}" in
       export JDBC_URL="jdbc:oracle:thin:@(description=(retry_count=5)(retry_delay=1)(address=(protocol=tcps)(port=1521)(host=${HOST}.oraclecloud.com))(connect_data=(service_name=${SERVICE}_tp.adb.oraclecloud.com))(security=(ssl_server_dn_match=no)))?oracle.jdbc.enableQueryResultCache=false&oracle.jdbc.thinForceDNSLoadBalancing=true&tcp.nodelay=yes"
       export JDBC_USER="micronaut_data_${RUNID}"
       export JDBC_PASSWORD="Oracle_19_Password"
-      echo "::set-env name=JSON_DEFAULT_DATA_TYPE::BLOB (%s is json)"
+      echo ""
+      echo "::set-env name=JSON_DEFAULT_DATA_TYPE::\"BLOB (%s is json)\""
 
       cat <<EOF > ./data-jdbc/src/test/resources/application.yml
 test-resources:
@@ -86,7 +87,8 @@ EOF
       export JDBC_URL="jdbc:oracle:thin:@${HOST}:1521/${SERVICE}"
       export JDBC_USER="micronaut_data_${RUNID}"
       export JDBC_PASSWORD="Oracle_19_Password"
-      echo "::set-env name=JSON_DEFAULT_DATA_TYPE::BLOB (%s is json)"
+      echo ""
+      echo "::set-env name=JSON_DEFAULT_DATA_TYPE::\"BLOB (%s is json)\""
 
       cat <<EOF > ./data-jdbc/src/test/resources/application.yml
 test-resources:

@@ -65,6 +65,8 @@ jobs:
 
       - name: "🛠 Build with Gradle"
         id: gradle
+        env:
+          JSON_DEFAULT_DATA_TYPE: ${JSON_DEFAULT_DATA_TYPE}
         run: |
           ./gradlew -Dio.micronaut.data.json.type.default.override=${{ env.JSON_DEFAULT_DATA_TYPE }} micronaut-data-jdbc:test --tests "*oracle*" --console=plain -Plog-test-progress=true --stacktrace --no-daemon --continue --info
 
