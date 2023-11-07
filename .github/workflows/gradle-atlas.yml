@@ -60,13 +60,14 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: "❓ Optional setup step"
+        id: setup
         run: |
           ./setup_atlas.sh ${{ matrix.rdbms }}
 
       - name: "🛠 Build with Gradle"
         id: gradle
         env:
-          JSON_DEFAULT_DATA_TYPE: ${JSON_DEFAULT_DATA_TYPE}
+          JSON_DEFAULT_DATA_TYPE: ${{ steps.setup.outputs.JSON_DEFAULT_DATA_TYPE }}
         run: |
           ./gradlew -Dio.micronaut.data.json.type.default.override=${{ env.JSON_DEFAULT_DATA_TYPE }} micronaut-data-jdbc:test --tests "*oracle*" --console=plain -Plog-test-progress=true --stacktrace --no-daemon --continue --info
 
