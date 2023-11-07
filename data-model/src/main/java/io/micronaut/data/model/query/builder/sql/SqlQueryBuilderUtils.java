@@ -350,8 +350,6 @@ final class SqlQueryBuilderUtils {
     }
 
     private static String jsonColumnDefinition(PersistentProperty prop, Dialect dialect, boolean required, String column) {
-        dialect.
-
         JsonDataType jsonDataType = prop.getJsonDataType();
         String result = "";
         switch (dialect) {
@@ -361,9 +359,6 @@ final class SqlQueryBuilderUtils {
             case SQL_SERVER:
                 result += " NVARCHAR(MAX)";
                 break;
-            case ORACLE_12:
-            case ORACLE_12R2:
-            case ORACLE_18:
             case ORACLE_19:
                 if (jsonDataType == JsonDataType.DEFAULT) {
                     result += " BLOB check ("+column+" is json)";
@@ -373,7 +368,6 @@ final class SqlQueryBuilderUtils {
                     result += " CLOB check ("+column+" is json)";
                 }
                 break;
-            case ORACLE_21:
             case ORACLE:
                 if (jsonDataType == JsonDataType.DEFAULT) {
                     result += " JSON";
